@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALM - Audio Language Model</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Audio Language Model</h1>
+
+        <form action="/" method="post" enctype="multipart/form-data">
+            <input type="file" accept=".mp3, .wav" name="audio" id="audio" required>
+            
+            <label for="audio" class="custom-file-upload">
+                Click to choose an audio file (.mp3, .wav)
+            </label>
+            <span id="file-name">No file chosen</span> <button type="submit" id="submit">Process Audio</button>
+        </form>
+
+        {% if error %}
+            <div class="error-message">
+                <h2>Processing Error:</h2>
+                <p>{{ error }}</p>
+            </div>
+        {% endif %}
+
+        {% if a %}
+            <hr>
+            <div class="results-section">
+                <h2>Transcription Results:</h2>
+                <p><strong>Detected Language:</strong> <span id="lang">{{ a }}</span></p>
+                <p><strong>Transcript:</strong> <span id="transcript">{{ b }}</span></p>
+                <p><strong>Translation (to English):</strong> <span id="translate">{{ c }}</span></p>
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        document.getElementById('audio').addEventListener('change', function() {
+            var fileName = this.files[0] ? this.files[0].name : "No file chosen";
+            document.getElementById('file-name').textContent = fileName;
+        });
+    </script>
+</body>
+</html>
