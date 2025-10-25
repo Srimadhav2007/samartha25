@@ -3,16 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALM</title>
+    <title>Audio Language Processor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
 </head>
 <body>
-    <form action="/" method="post" enctype="multipart/form-data">
-        <input type="file" accept=".mp3, .wav" name="audio" id="audio">
-        <button type="submit" id="submit">Process</button>
-    </form>
-    <h1 id="lang">{{a}}</h1>
-    <p id="transcript">{{b | safe}}</p>
-    <p id="translate">{{c}}</p>
+    <div class="container">
+        <div class="card">
+            <h2 class="card-title">Upload Your Audio File</h2>
+            <p class="card-subtitle">Process .mp3 or .wav files to detect language, get a transcript, and a translation.</p>
+
+            <form action="/" method="post" enctype="multipart/form-data" id="upload-form">
+                <div class="file-upload-wrapper">
+                    <input type="file" accept=".mp3, .wav" name="audio" id="audio" class="file-input" required>
+                    <label for="audio" class="file-label">
+                        <span class="file-icon">&#128193;</span> <span class="file-button-text">Choose a file...</span>
+                    </label>
+                    <span id="file-name" class="file-name">No file selected</span>
+                </div>
+
+                <button type="submit" id="submit-btn" class="submit-btn">
+                    <span class="btn-text">Process Audio</span>
+                    <span class="spinner"></span>
+                </button>
+            </form>
+        </div>
+
+        {% if a or b or c %}
+        <div class="card results-card">
+            <h2 class="card-title">Processing Results</h2>
+            
+            {% if a %}
+            <div class="result-item">
+                <h3>Detected Language</h3>
+                <p id="lang">{{ a }}</p>
+            </div>
+            {% endif %}
+            
+            {% if b %}
+            <div class="result-item">
+                <h3>Transcript</h3>
+                <div id="transcript" class="transcript-box">{{ b | safe }}</div>
+            </div>
+            {% endif %}
+            
+            {% if c %}
+            <div class="result-item">
+                <h3>Translation</h3>
+                <p id="translate">{{ c }}</p>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        const audioInput = document.getElementById('audio');
+        const fileNameDisplay = document.getElementById('file-name');
+        const uploadForm = document.getElementById('upload-form');
+        const submitBtn = document.getElementById('submit-btn');
+
+        audioInput.addEventListener('change', () => {
+            if (audioInput.files.length > 0) {
+                fileNameDisplay.textContent = audioInput.files[0].name;
+            } else {
+                fileNameDisplay.textContent = 'No file selected';
+            }
+        });
+
+        uploadForm.addEventListener('submit', () => {
+            // Prevent button from being clicked again
+            submitBtn.disabled = true;
+            // Show loading spinner
+            submitBtn.classList.add('loading');
+        });
+    </script>
 </body>
 </html>

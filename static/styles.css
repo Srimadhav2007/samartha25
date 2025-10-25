@@ -1,0 +1,178 @@
+/* General Body Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Main Container */
+.container {
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Card Styling */
+.card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.card-title {
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: #1a2b4d;
+}
+
+.card-subtitle {
+    font-size: 0.95em;
+    color: #666;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+/* Custom File Upload Input */
+.file-upload-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border: 2px dashed #dce4f0;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+    background-color: #f9fafb;
+}
+
+.file-input {
+    display: none; /* Hide the default input */
+}
+
+.file-label {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.file-label:hover {
+    background-color: #0056b3;
+}
+
+.file-icon {
+    font-size: 1.2em;
+}
+
+.file-name {
+    color: #555;
+    font-size: 0.9em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1em;
+    font-weight: 500;
+    color: #fff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.submit-btn:hover:not(:disabled) {
+    background-color: #218838;
+}
+
+.submit-btn:disabled {
+    background-color: #94d3a2;
+    cursor: not-allowed;
+}
+
+/* Loading Spinner on Button */
+.spinner {
+    display: none;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+}
+
+.submit-btn.loading .btn-text {
+    display: none;
+}
+
+.submit-btn.loading .spinner {
+    display: block;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Results Card Styling */
+.results-card {
+    background-color: #e9f5ff;
+}
+
+.result-item {
+    margin-bottom: 20px;
+}
+
+.result-item h3 {
+    font-size: 1.1em;
+    color: #0056b3;
+    border-bottom: 2px solid #bde0ff;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.result-item p {
+    font-size: 1em;
+    color: #333;
+    line-height: 1.6;
+}
+
+.transcript-box {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #dce4f0;
+    line-height: 1.6;
+    max-height: 200px;
+    overflow-y: auto;
+}
